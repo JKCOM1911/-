@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ผจญภัยเกาะตรรกะโค้ดดิ้ง: สื่อการเรียนรู้วิทยาการคำนวณและแบบทดสอบ</title>
+  <meta name="description" content="สื่อนวัตกรรมช่วยสอนวิทยาการคำนวณ ว 4.2 เรื่องการคิดเชิงคำนวณ อัลกอริทึม การบอกทิศทาง การดีบัก และการประยุกต์ใช้ในชีวิตประจำวัน พร้อมแบบทดสอบก่อน-หลังเรียน">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+</head>
+<body>
+
+  <!-- Background Dynamic Ambient -->
+  <div class="bg-mesh"></div>
+
+  <!-- Navbar / Tab Bar -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" onclick="switchMainTab('hero')">
+        <div class="brand-icon">🤖</div>
+        <div class="brand-text">
+          <h1>เกาะตรรกะโค้ดดิ้ง CAI</h1>
+          <span>สื่อการเรียนรู้เชิงรุก (Active Learning)</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li style="display: none;"><a href="#hero" class="nav-link active" data-tab="hero">🏠 หน้าแรก</a></li>
+        <li style="display: none;"><a href="#pretest" class="nav-link" data-tab="pretest">📝 ก่อนเรียน</a></li>
+        <li><a href="#story" class="nav-link" data-tab="story">🎬 บทนำเรื่อง</a></li>
+        <li><a href="#lessons" class="nav-link" data-tab="lessons">📚 บทเรียน</a></li>
+        <li><a href="#game" class="nav-link" data-tab="game">🎮 ทดลองโค้ด</a></li>
+        <li><a href="#posttest" class="nav-link" data-tab="posttest">🎯 หลังเรียน</a></li>
+        <li><a href="#application" class="nav-link" data-tab="application">💡 การนำไปใช้</a></li>
+        <li style="display: none;"><a href="#certificate" class="nav-link" data-tab="certificate">🏆 เกียรติบัตร</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleSound()">
+          🔊 เสียง: เปิด
+        </button>
+      </div>
+    </div>
+    <div class="global-progress-container" title="ความก้าวหน้าการเรียนรู้">
+      <div class="global-progress-bar" id="globalProgressBar"></div>
+    </div>
+  </nav>
+
+  <!-- Main Multi-Tab Container -->
+  <main class="main-content" id="mainContent">
+
+    <!-- TAB 1: หน้าแรก (HERO) — หน้าแรกสุดของระบบ -->
+    <div class="tab-pane active" id="tab-hero">
+      <section class="hero-section">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span>✨ มาตรฐาน ว 4.2 วิทยาการคำนวณ (ประถมวัย ป.1 - ป.4)</span>
+            </div>
+            <h1 class="hero-title">
+              ผจญภัยเกาะตรรกะโค้ดดิ้ง<br>
+              <span class="highlight">ตะลุยเขาวงกตล่าสมบัติ</span>
+            </h1>
+            <div class="hero-objectives">
+              <h3 class="hero-obj-title">🎯 วัตถุประสงค์การเรียนรู้</h3>
+              <ul class="hero-obj-list">
+                <li><strong class="badge-k">ด้านความรู้ (K):</strong> อธิบายการทำงานและหลักการแก้ปัญหาอย่างเป็นขั้นตอนโดยใช้เหตุผลเชิงตรรกะ</li>
+                <li><strong class="badge-p">ด้านทักษะ (P):</strong> ฝึกเขียนลำดับความคิด และเลือกวิธีการแก้ปัญหาจำลองตามลำดับความสำคัญ</li>
+                <li><strong class="badge-a">ด้านเจตคติ (A):</strong> เห็นความสำคัญและประโยชน์ของการใช้เหตุผลเชิงตรรกะในการแก้ปัญหาและการทำงานร่วมกัน</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="visual-card-3d">
+              <div class="hero-character-showcase">
+                <div class="hero-char-main">
+                  <img src="char_goodjob.jpg" alt="น้องเก่ง" class="hero-char-img" id="heroCharImg">
+                </div>
+                <div class="hero-char-moods">
+                  <button class="mood-btn active" onclick="changeHeroMood('goodjob', this)" title="Good Job!">
+                    <img src="char_goodjob.jpg" alt="Good Job">
+                    <span>เก่ง!</span>
+                  </button>
+                  <button class="mood-btn" onclick="changeHeroMood('happy', this)" title="มีความสุข">
+                    <img src="char_happy.jpg" alt="Happy">
+                    <span>สุขใจ</span>
+                  </button>
+                  <button class="mood-btn" onclick="changeHeroMood('wow', this)" title="ว้าว!">
+                    <img src="char_wow.jpg" alt="Wow">
+                    <span>ว้าว!</span>
+                  </button>
+                  <button class="mood-btn" onclick="changeHeroMood('thinking', this)" title="กำลังคิด">
+                    <img src="char_thinking.jpg" alt="Thinking">
+                    <span>คิดอยู่</span>
+                  </button>
+                  <button class="mood-btn" onclick="changeHeroMood('sad', this)" title="เศร้า">
+                    <img src="char_sad.jpg" alt="Sad">
+                    <span>เศร้า</span>
+                  </button>
+                </div>
+              </div>
+              <div class="visual-dialogue">
+                🎒 น้องเก่ง: "ปัญหาแก้ได้ง่าย แค่วางแผนเป็นขั้นตอน! มาร่วมผจญภัยในเกาะตรรกะโค้ดดิ้งไปด้วยกันนะ!"
+              </div>
+              <div class="hero-char-name-badge">👦 น้องเก่ง — นักผจญภัยตัวจิ๋ว วัย 7 ขวบ</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ปุ่มตรงกลางล่างขนาดใหญ่พิเศษ เด่นชัด -->
+        <div class="hero-bottom-cta">
+          <button onclick="handleNextFromHero()" class="btn btn-primary btn-hero-mega" id="btnHeroMainPretest">
+            <span class="mega-btn-icon">📝</span>
+            <span class="mega-btn-text">เข้าสู่แบบทดสอบก่อนเรียน (10 ข้อ)</span>
+            <span class="mega-btn-arrow">➔</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 2: ก่อนเรียน (PRE-TEST) -->
+    <div class="tab-pane" id="tab-pretest">
+      <section class="section">
+        <div class="section-header">
+          <span class="section-badge">📝 แบบทดสอบก่อนเรียน (PRE-TEST)</span>
+          <h2 class="section-title">สำรวจความรู้เดิม: ทักษะตรรกะ & การคิดเชิงคำนวณ</h2>
+          <p class="section-subtitle">ทดสอบความรู้พื้นฐาน 10 ข้อ (มาตรฐานตัวชี้วัด ว 4.2 ป.1 - ป.4) เพื่อวัดระดับก่อนเริ่มบทเรียน</p>
+        </div>
+
+        <div class="quiz-container">
+          <div class="quiz-header-bar">
+            <div class="quiz-badge-group">
+              <span class="quiz-badge pre">📋 Pre-Test 10 ข้อ</span>
+              <span id="preAnsweredCount" class="quiz-counter">ตอบแล้ว 0/10 ข้อ</span>
+            </div>
+            <div id="preTestTimerBadge" class="quiz-timer-badge">
+              ⏱️ เวลาที่เหลือ: <strong id="preTestTimer">05:00</strong>
+            </div>
+          </div>
+
+          <div class="question-list" id="preTestQuestionList">
+            <!-- Dynamic Rendered Questions 1-10 -->
+          </div>
+
+          <div class="quiz-footer">
+            <span style="font-size: 0.88rem; color: var(--text-muted);">* แบบทดสอบก่อนเรียน 10 ข้อเพื่อสำรวจความรู้เดิมของนักเรียน</span>
+            <button class="btn btn-primary btn-lg" id="btnSubmitPreTest" onclick="submitPreTest()">
+              ✨ ส่งคำตอบและตรวจผลคะแนนก่อนเรียน
+            </button>
+          </div>
+
+          <!-- Score Banner (Pre-test) -->
+          <div class="score-banner" id="preTestScoreBanner">
+            <div class="score-grid">
+              <div class="score-circle-wrapper">
+                <span class="score-number" id="preTestScoreNum">0</span>
+                <span class="score-max">/ 10 คะแนน</span>
+              </div>
+              <div>
+                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">ผลคะแนนแบบทดสอบก่อนเรียนของคุณ</h3>
+                <p id="preTestScoreRemark" style="font-size: 1rem; line-height: 1.6; opacity: 0.95;"></p>
+                <div style="margin-top: 14px;">
+                  <button onclick="switchMainTab('lesson1')" class="btn btn-accent btn-sm">🎬 ไปเรียนบทที่ 1: ตรรกะและอัลกอริทึม ➡️</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Tab Footer -->
+        <div class="tab-nav-footer">
+          <button class="btn btn-outline" onclick="switchMainTab('hero')">◀ ย้อนกลับ: 🏠 หน้าแรก</button>
+          <span class="tab-nav-info">แท็บที่ 2 / 8: แบบทดสอบก่อนเรียน</span>
+          <button class="btn btn-primary btn-locked" id="btnNextFromPretest" onclick="handleNextFromPretest()">🔒 ส่งข้อสอบก่อนเรียนเพื่อไปต่อ ▶</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 3: บทนำเรื่อง (STORY) — การผจญภัยของน้องเก่ง 5 ฉาก -->
+    <!-- ============================================================ -->
+    <div class="tab-pane" id="tab-story">
+      <section class="section">
+        <div class="section-header">
+          <span class="section-badge">🎬 บทนำเรื่อง • นิทานตรรกะโค้ดดิ้ง</span>
+          <h2 class="section-title">การผจญภัยสู่เกาะลอยฟ้าของน้องเก่ง</h2>
+          <p class="section-subtitle">ร่วมเดินทางและเรียนรู้แนวคิดการแก้ปัญหาอย่างเป็นขั้นตอนผ่านนิทานภาพแสนสนุก 5 ฉาก</p>
+        </div>
+
+        <div class="story-container">
+          <div class="story-box" id="storyBox">
+            <div class="story-visual-side">
+              <div class="story-char-frame">
+                <img src="char_wow.jpg" alt="น้องเก่ง" id="storyCharImg">
+              </div>
+              <div class="story-icon-badge" id="storyIconBadge">🏝️</div>
+            </div>
+            <div class="story-content-side">
+              <div>
+                <span class="story-act-tag" id="storyActTag">องก์ที่ 1: การเดินทางสู่แดนเขาวงกต</span>
+                <h3 class="story-scene-title" id="storySceneTitle">ยินดีต้อนรับสู่เกาะตรรกะโค้ดดิ้ง</h3>
+                <p class="story-scene-desc" id="storySceneDesc">น้องเก่งออกเดินทางสำรวจเกาะลอยฟ้าแห่งตรรกะโค้ดดิ้ง แต่ทันใดนั้น หีบสมบัติตกลงไปในเขาวงกตหินปริศนา!</p>
+                <div class="story-dialogue-bubble" id="storyDialogueBubble">
+                  น้องเก่ง: 'ว้าว! เกาะลอยฟ้าสวยมากเลย... อ้าว! หีบสมบัติตกแล้ว เราต้องหาทางเข้าไปเก็บคืนมาให้ได้!'
+                </div>
+              </div>
+              <div class="story-tip-chip" id="storyTipChip">
+                <span>💡</span> <span id="storyTipText">การเริ่มต้นแก้ปัญหา ต้องเริ่มจากการสังเกตและทำความเข้าใจเป้าหมาย</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-controls">
+            <button class="btn btn-outline btn-sm" id="btnPrevStory" onclick="prevStoryScene()">◀ ย้อนกลับฉากก่อนหน้า</button>
+            <div class="story-dots" id="storyDots"></div>
+            <button class="btn btn-outline btn-sm" id="btnNextStory" onclick="nextStoryScene()">ฉากถัดไป ▶</button>
+          </div>
+        </div>
+
+        <div class="tab-nav-footer">
+          <button class="btn btn-outline" onclick="switchMainTab('pretest')">◀ ย้อนกลับ: 📝 ก่อนเรียน</button>
+          <span class="tab-nav-info">แท็บที่ 3 / 8: บทนำเรื่อง</span>
+          <button class="btn btn-primary" onclick="switchMainTab('lessons')">ไปแท็บถัดไป: 📚 สารบัญบทเรียน ▶</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 4: สารบัญบทเรียน (LESSONS) & โรงภาพยนตร์วิดีโอเดี่ยว -->
+    <!-- ============================================================ -->
+    <div class="tab-pane" id="tab-lessons">
+      <!-- VIEW 1: สารบัญเลือก 4 บทเรียน -->
+      <div id="lessonHubView">
+        <section class="section">
+          <div class="section-header">
+            <span class="section-badge">📚 สารบัญบทเรียน • สื่อแอนิเมชัน 4 บท</span>
+            <h2 class="section-title">ศูนย์รวมสื่อการเรียนรู้วิทยาการคำนวณ</h2>
+            <p class="section-subtitle">เลือกคลิกบทเรียนที่ต้องการเพื่อเปิดห้องรับชมวิดีโอคุณภาพสูงแบบเต็มตา</p>
+          </div>
+
+          <!-- Progress summary -->
+          <div class="lesson-hub-banner">
+            <div class="lesson-hub-banner-top">
+              <div class="lesson-hub-banner-title">
+                <span>📊</span> <span>ความคืบหน้ารับชมสื่อทั้งหมด</span>
+              </div>
+              <div class="lesson-hub-banner-badge" id="lessonHubProgressText">รับชมแล้ว 0 / 4 บท</div>
+            </div>
+            <div class="lesson-hub-track">
+              <div class="lesson-hub-bar" id="lessonHubProgressBar"></div>
+            </div>
+          </div>
+
+          <!-- 4 Cards Grid -->
+          <div class="lesson-hub-grid" id="lessonHubGrid"></div>
+
+          <div class="tab-nav-footer">
+            <button class="btn btn-outline" onclick="switchMainTab('story')">◀ ย้อนกลับ: 🎬 บทนำเรื่อง</button>
+            <span class="tab-nav-info">แท็บที่ 4 / 8: สารบัญบทเรียน</span>
+            <button class="btn btn-primary" id="btnNextFromLessonHub" onclick="handleNextFromLessonHub()">เข้าสู่บทเรียน: 🧩 บทที่ 1 ▶</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- VIEW 2: หน้าเล่นวิดีโอเดี่ยวแบบเต็มจอ (Dedicated Video Player) -->
+      <div id="lessonPlayerView" class="lesson-player-view">
+        <section class="section">
+          <div class="lesson-player-topbar">
+            <button class="btn btn-outline btn-sm" onclick="backToLessonHub()">◀ กลับหน้ารวมบทเรียน</button>
+            <div class="lesson-player-info">
+              <span class="lesson-player-badge" id="playerStepBadge">GPAS Step 1</span>
+              <span class="lesson-player-title" id="playerChapterTitle">บทที่ 1: ตรรกะและอัลกอริทึมรอบตัวเรา</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm" id="btnPrevPlayerChapter" onclick="prevLessonChapter()">◀ บทก่อนหน้า</button>
+              <button class="btn btn-outline btn-sm" id="btnNextPlayerChapter" onclick="nextLessonChapter()">บทถัดไป ▶</button>
+            </div>
+          </div>
+
+          <div class="clean-cinema-screen">
+            <video id="cinemaVideoPlayer" class="cinema-video" controls controlsList="nodownload noplaybackrate" playsinline preload="metadata">
+              <source id="cinemaVideoSource" src="สื่อ/สื่อ1.mp4" type="video/mp4">
+              เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ HTML5
+            </video>
+          </div>
+
+          <div id="videoWatchNotice" class="video-watch-notice">
+            <div class="video-notice-header" id="videoNoticeHeader">
+              <span id="videoWatchStatus">🎬 กำลังรับชม: บทที่ 1 ตรรกะและอัลกอริทึมรอบตัวเรา</span>
+              <strong id="videoWatchPercentText">0%</strong>
+            </div>
+            <div class="video-progress-track">
+              <div id="videoProgressBarFill" class="video-progress-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="lesson-tip-card">
+            <div class="lesson-tip-icon" id="playerTipIcon">💡</div>
+            <div class="lesson-tip-body">
+              <span class="lesson-tip-badge" id="playerTipBadge">พื้นฐานสำคัญ</span>
+              <p class="lesson-tip-text" id="playerTipText">การเริ่มต้นแก้ปัญหา ต้องเริ่มจากการสังเกตและวางลำดับขั้นตอนทีละก้าวให้ชัดเจน</p>
+            </div>
+          </div>
+
+          <div class="tab-nav-footer">
+            <button class="btn btn-outline" onclick="backToLessonHub()">◀ ย้อนกลับ: สารบัญบทเรียน</button>
+            <span class="tab-nav-info" id="playerFooterInfo">บทเรียนที่ 1 / 4</span>
+            <button class="btn btn-primary" id="btnNextFromPlayer" onclick="handleNextFromPlayer()">บทถัดไป ▶</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- TAB 4: ห้องทดลองโค้ดดิ้ง 3D Sandbox (GAME) -->
+    <div class="tab-pane" id="tab-game">
+      <section class="section">
+        <div class="section-header">
+          <span class="section-badge">🎮 นวัตกรรมจำลองเกม (3D INTERACTIVE ENGINE)</span>
+          <h2 class="section-title">ห้องทดลองโค้ดดิ้ง: พายหุ่นยนต์บ็อบพิชิตหีบสมบัติ</h2>
+          <p class="section-subtitle">วางบล็อกคำสั่งพาหุ่นยนต์บ็อบเดินเลี่ยงหินและพุ่มไม้ เพื่อไปเก็บหีบสมบัติตรรกะทองคำ</p>
+        </div>
+
+        <div class="game-layout">
+          <!-- Left: Canvas Grid -->
+          <div class="game-board-side">
+            <div class="board-header">
+              <span class="mission-goal">🎯 เป้าหมาย: พิกัด (4,4) 💎 หีบสมบัติ</span>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">ตาราง 5x5 พิกัด</span>
+            </div>
+
+            <div class="grid-canvas-wrap">
+              <canvas id="gridCanvas" width="360" height="360"></canvas>
+            </div>
+
+            <div class="game-legend">
+              <div class="legend-item"><span>🤖</span> บ็อบ (เริ่ม 0,0)</div>
+              <div class="legend-item"><span>🪨</span> ก้อนหิน</div>
+              <div class="legend-item"><span>🌳</span> พุ่มไม้</div>
+              <div class="legend-item"><span>🌊</span> น้ำ</div>
+              <div class="legend-item"><span>💎</span> หีบสมบัติ</div>
+            </div>
+          </div>
+
+          <!-- Right: Workspace & Block Palette -->
+          <div class="game-workspace-side">
+            <div>
+              <div class="palette-title">📦 กล่องบล็อกคำสั่ง (คลิกเพื่อเพิ่มลงในโปรแกรม):</div>
+              <div class="palette-buttons">
+                <button class="block-btn fwd" onclick="addGameBlock('forward')">⬆️ เดินหน้า 1 ก้าว</button>
+                <button class="block-btn left" onclick="addGameBlock('turnLeft')">↩️ หันซ้าย (90°)</button>
+                <button class="block-btn right" onclick="addGameBlock('turnRight')">↪️ หันขวา (90°)</button>
+                <button class="block-btn loop" onclick="addGameBlock('loop3')">🔁 เดินหน้า 3 ช่อง</button>
+                <button class="block-btn treasure" onclick="addGameBlock('collect')">💎 เก็บสมบัติ</button>
+              </div>
+
+              <div class="palette-title" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>📝 ลำดับโค้ดคำสั่ง (Workspace):</span>
+                <button class="btn btn-outline btn-sm" onclick="clearGameWorkspace()">🗑️ ล้างทั้งหมด</button>
+              </div>
+
+              <div class="workspace-container" id="gameWorkspaceContainer">
+                <div class="workspace-placeholder">ลากหรือคลิกปุ่มคำสั่งด้านบนเพื่อเพิ่มบล็อกคำสั่งที่นี่...</div>
+              </div>
+
+              <div class="game-status-msg" id="gameStatusMsg"></div>
+            </div>
+
+            <div class="game-controls-bar">
+              <button class="btn btn-primary" onclick="runCodingGame()">▶️ เริ่มรันโปรแกรม (Run)</button>
+              <button class="btn btn-outline" onclick="resetCodingGame()">🔄 รีเซ็ตตำแหน่ง</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Tab Footer -->
+        <div class="tab-nav-footer">
+          <button class="btn btn-outline" onclick="switchMainTab('lessons')">◀ ย้อนกลับ: 📚 สารบัญบทเรียน</button>
+          <span class="tab-nav-info">แท็บที่ 5 / 8: ห้องทดลองโค้ดดิ้งจำลอง</span>
+          <button class="btn btn-primary" onclick="switchMainTab('posttest')">ไปแท็บถัดไป: 🎯 แบบทดสอบหลังเรียน ▶</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 6: แบบทดสอบหลังเรียน (POST-TEST) -->
+    <div class="tab-pane" id="tab-posttest">
+      <section class="section">
+        <div class="section-header">
+          <span class="section-badge">🎯 แบบทดสอบหลังเรียน (POST-TEST)</span>
+          <h2 class="section-title">วัดผลสัมฤทธิ์ทางการเรียนรู้ (Post-Assessment)</h2>
+          <p class="section-subtitle">แบบทดสอบวัดระดับหลังเรียน 10 ข้อ เพื่อเปรียบเทียบพัฒนาการและวิเคราะห์ผลลัพธ์</p>
+        </div>
+
+        <div class="quiz-container">
+          <div class="quiz-header-bar">
+            <div class="quiz-badge-group">
+              <span class="quiz-badge post">🎯 Post-Test 10 ข้อ</span>
+              <span id="postAnsweredCount" class="quiz-counter">ตอบแล้ว 0/10 ข้อ</span>
+            </div>
+            <div id="postTestTimerBadge" class="quiz-timer-badge">
+              ⏱️ เวลาที่เหลือ: <strong id="postTestTimer">05:00</strong>
+            </div>
+          </div>
+
+          <div class="question-list" id="postTestQuestionList">
+            <!-- Dynamic Rendered Questions 1-10 -->
+          </div>
+
+          <div class="quiz-footer">
+            <span style="font-size: 0.88rem; color: var(--text-muted);">* ส่งคำตอบเพื่อคำนวณค่าพัฒนาการ Pre-Test vs Post-Test</span>
+            <button class="btn btn-accent btn-lg" id="btnSubmitPostTest" onclick="submitPostTest()">
+              🏆 ส่งคำตอบและประมวลผลคะแนนหลังเรียน
+            </button>
+          </div>
+
+          <!-- Score Banner (Post-test) -->
+          <div class="score-banner" id="postTestScoreBanner" style="background: linear-gradient(135deg, #312e81, #f72585);">
+            <div class="score-grid">
+              <div class="score-circle-wrapper">
+                <span class="score-number" id="postTestScoreNum">0</span>
+                <span class="score-max">/ 10 คะแนน</span>
+              </div>
+              <div>
+                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">ผลคะแนนแบบทดสอบหลังเรียนของคุณ</h3>
+                <p id="postTestScoreRemark" style="font-size: 1rem; line-height: 1.6; opacity: 0.95;"></p>
+                <div style="margin-top: 14px;">
+                  <button onclick="switchMainTab('application')" class="btn btn-primary btn-sm">📊 ไปดูสรุปการนำไปใช้จริง ➔</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pre vs Post Comparison Graph / Metrics -->
+          <div class="comparison-banner" id="comparisonBanner">
+            <h3 style="font-size: 1.3rem; color: #0f172a; text-align: center; margin-bottom: 6px;">
+              📊 รายงานการเปรียบเทียบผลสัมฤทธิ์ทางการเรียนรู้ (Pre vs Post Analysis)
+            </h3>
+            <p style="text-align: center; font-size: 0.92rem; color: var(--text-muted);">
+              การประเมินทักษะตรรกะและการคิดเชิงคำนวณตามมาตรฐานตัวชี้วัด ว 4.2
+            </p>
+
+            <div class="comparison-metrics">
+              <div class="metric-card">
+                <div class="metric-title">คะแนนก่อนเรียน (Pre-Test)</div>
+                <div class="metric-val pre" id="compPreScore">0/10</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-title">คะแนนหลังเรียน (Post-Test)</div>
+                <div class="metric-val post" id="compPostScore">0/10</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-title">ค่าพัฒนาการ (Improvement)</div>
+                <div class="metric-val diff" id="compDiffScore">+0%</div>
+              </div>
+            </div>
+
+            <div id="compDescription" style="margin-top: 18px; padding: 16px; background: #f8fafc; border-radius: 10px; font-size: 0.95rem; text-align: center;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Tab Footer -->
+        <div class="tab-nav-footer">
+          <button class="btn btn-outline" onclick="switchMainTab('game')">◀ ย้อนกลับ: 🎮 ห้องทดลองโค้ดดิ้งจำลอง</button>
+          <span class="tab-nav-info">แท็บที่ 6 / 8: แบบทดสอบหลังเรียน</span>
+          <button class="btn btn-primary btn-locked" id="btnNextFromPosttest" onclick="handleNextFromPosttest()">🔒 ส่งข้อสอบหลังเรียนเพื่อไปต่อ ▶</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 6: สรุปและการนำไปใช้จริง & สะท้อนคิด (APPLICATION) -->
+    <div class="tab-pane" id="tab-application">
+      <section class="section">
+        <div class="section-header">
+          <span class="section-badge">💡 สรุปการนำไปใช้ (REAL-WORLD APPLICATION)</span>
+          <h2 class="section-title">การนำกระบวนการคิดเชิงคำนวณไปใช้ในชีวิตจริง</h2>
+          <p class="section-subtitle">เปลี่ยนชีวิตประจำวันให้เป็นเรื่องง่าย ด้วยการคิดเป็นขั้นตอนและการออกแบบอัลกอริทึม</p>
+        </div>
+
+        <div class="real-life-grid" id="realLifeGrid">
+          <!-- Dynamic rendered application cards -->
+        </div>
+
+        <!-- Group Rubrics & Self-Reflection -->
+        <div class="card" style="margin-top: 40px;">
+          <h3 style="font-size: 1.3rem; margin-bottom: 16px; color: #0f172a;">
+            📋 เกณฑ์การประเมินกระบวนการทำงานกลุ่ม & ทักษะตรรกะ (Group Rubrics)
+          </h3>
+          <div class="rubric-table-wrapper">
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>ระดับคุณภาพ</th>
+                  <th>คะแนน</th>
+                  <th>คำอธิบายเกณฑ์การประเมิน</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="rubric-badge score4">ดีมาก</span></td>
+                  <td><strong>4</strong></td>
+                  <td>มีการกำหนดบทบาทสมาชิกชัดเจน ชี้แจงเป้าหมาย ปฏิบัติงานร่วมกัน และมีการประเมินผลตรวจสอบ Bug เป็นระยะ</td>
+                </tr>
+                <tr>
+                  <td><span class="rubric-badge score3">ดี</span></td>
+                  <td><strong>3</strong></td>
+                  <td>มีการกำหนดบทบาทและเป้าหมายชัดเจน ปฏิบัติงานร่วมกัน แต่ไม่มีการประเมินผลเป็นระยะ</td>
+                </tr>
+                <tr>
+                  <td><span class="rubric-badge score2">พอใช้</span></td>
+                  <td><strong>2</strong></td>
+                  <td>มีการกำหนดบทบาทเฉพาะหัวหน้า ไม่มีการชี้แจงเป้าหมายที่ชัดเจน ปฏิบัติงานร่วมกันไม่ครบทุกคน</td>
+                </tr>
+                <tr>
+                  <td><span class="rubric-badge score1">ปรับปรุง</span></td>
+                  <td><strong>1</strong></td>
+                  <td>ไม่มีการกำหนดบทบาทสมาชิก ไม่แจ้งเป้าหมาย สมาชิกต่างคนต่างทำงาน</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 style="font-size: 1.1rem; margin: 24px 0 12px; color: #0f172a;">
+            💭 คำถามสะท้อนคิดส่วนบุคคล (Self-Reflection Prompts)
+          </h4>
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem; color: #334155;">
+            <div>1. <strong>สิ่งที่ฉันได้เรียนรู้จากการแก้ปัญหาในวันนี้:</strong> ช่วยให้เข้าใจการคิดเป็นระบบและการหาข้อผิดพลาดทีละขั้น</div>
+            <div>2. <strong>เมื่อพบปัญหา (Bug) ฉันควรทำอย่างไร:</strong> ตรวจสอบคำสั่งทีละบรรทัด (Step Execution) และใจเย็นๆ ร่วมมือกับเพื่อน</div>
+            <div>3. <strong>ฉันจะนำการคิดแบบโค้ดดิ้งไปใช้ในชีวิตประจำวันอย่างไร:</strong> การวางแผนจัดกระเป๋านักเรียน การจัดตารางเวลา และการเลือกเส้นทางเดินทาง</div>
+          </div>
+        </div>
+
+        <!-- Bottom Tab Footer -->
+        <div class="tab-nav-footer">
+          <button class="btn btn-outline" onclick="switchMainTab('posttest')">◀ ย้อนกลับ: 🎯 แบบทดสอบหลังเรียน</button>
+          <span class="tab-nav-info">แท็บที่ 7 / 8: สรุปการนำไปใช้จริง</span>
+          <button class="btn btn-primary" onclick="switchMainTab('certificate')">ไปแท็บถัดไป: 🏆 เกียรติบัตรรับรองผล ▶</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 7: เกียรติบัตรอิเล็กทรอนิกส์ (CERTIFICATE) -->
+    <div class="tab-pane" id="tab-certificate">
+      <section class="section">
+        
+        <!-- LOCKED STATE: เมื่อยังไม่ได้ส่งแบบทดสอบหลังเรียน -->
+        <div id="certLockedView" style="text-align: center; max-width: 650px; margin: 40px auto; padding: 50px 30px; background: #ffffff; border-radius: var(--radius-lg); border: 2px dashed #cbd5e1; box-shadow: var(--shadow-md);">
+          <div style="font-size: 4.5rem; margin-bottom: 16px; animation: float 3s ease-in-out infinite;">🔒</div>
+          <span class="section-badge" style="background: rgba(239, 71, 111, 0.12); color: var(--accent-red);">ยังไม่ปลดล็อคเกียรติบัตร</span>
+          <h2 style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin: 14px 0 10px;">
+            กรุณาทำแบบทดสอบหลังเรียนให้เสร็จสิ้นก่อน
+          </h2>
+          <p style="font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px;">
+            เกียรติบัตรและรายงานผลสัมฤทธิ์ทางการเรียนรู้จะถูกสร้างขึ้นอัตโนมัติ เมื่อนักเรียนส่งคำตอบในแบบทดสอบหลังเรียน (Post-Test 10 ข้อ) เรียบร้อยแล้วครับ
+          </p>
+          <div>
+            <button class="btn btn-accent btn-lg" onclick="switchMainTab('posttest')">
+              🎯 ไปทำแบบทดสอบหลังเรียน (Post-Test 10 ข้อ) ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- UNLOCKED STATE: แสดงเมื่อทำแบบทดสอบหลังเรียนเสร็จสิ้นแล้ว -->
+        <div id="certUnlockedView" style="display: none;">
+          <div class="section-header">
+            <span class="section-badge">🏆 เกียรติบัตรนักโค้ดดิ่ง (CERTIFICATE OF ACHIEVEMENT)</span>
+            <h2 class="section-title">เกียรติบัตรรับรองความสำเร็จ</h2>
+            <p class="section-subtitle">บันทึกชื่อของคุณเพื่อพิมพ์เกียรติบัตรและรายงานผลการเรียนรู้นวัตกรรม CAI</p>
+          </div>
+
+          <div class="certificate-preview">
+            <div class="cert-header">
+              <div style="font-size: 3rem;">🎖️</div>
+              <h3>เกียรติบัตรผู้ผ่านการเรียนรู้</h3>
+              <p style="color: var(--text-muted); font-size: 0.95rem;">
+                หลักสูตร: การเขียนโปรแกรมแบบบอกทิศทางและแนวคิดเชิงคำนวณ (ว 4.2)
+              </p>
+            </div>
+
+            <div style="margin: 20px 0;">
+              <p style="font-size: 1rem; color: var(--text-muted);">ขอมอบเกียรติบัตรฉบับนี้ให้แก่</p>
+              <input type="text" class="cert-name-input" id="certStudentName" placeholder="พิมพ์ชื่อ - นามสกุลของคุณที่นี่" value="เด็กชาย / เด็กหญิง นักคิดตรรกะ">
+              <p style="font-size: 0.95rem; color: #334155; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                ได้ผ่านการศึกษาบทเรียนเชิงรุก การทำแบบทดสอบก่อน-หลังเรียน และการปฏิบัติการจำลองแก้ปัญหาทางตรรกะด้วยความสำเร็จยอดเยี่ยม
+              </p>
+            </div>
+
+            <div class="cert-badges-row">
+              <div class="cert-seal">⭐</div>
+            </div>
+
+            <div id="certScoreBadge" style="display: inline-block; padding: 6px 18px; background: rgba(67, 97, 238, 0.1); border-radius: 20px; font-weight: 700; color: var(--primary); margin-bottom: 18px;">
+              คะแนนหลังเรียน: 10/10 | การพัฒนา: +100%
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 30px; padding: 0 30px;">
+              <div style="text-align: center;">
+                <p style="font-size: 0.85rem; color: var(--text-muted);">วันที่สำเร็จการเรียนรู้</p>
+                <strong id="certDate" style="font-size: 0.95rem; color: #0f172a;">27 สิงหาคม 2569</strong>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 1.4rem; font-family: cursive; color: var(--primary);">อาจารย์หารศึก</div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid #cbd5e1; padding-top: 4px;">
+                  (อาจารย์หารศึก & คณะผู้สร้างสรรค์สื่อ CAI)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 30px;">
+            <button class="btn btn-primary btn-lg" onclick="printReportCard()">
+              🖨️ พิมพ์เกียรติบัตร / บันทึกเป็น PDF (Print Certificate)
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom Tab Footer -->
+        <div class="tab-nav-footer">
+          <button class="btn btn-outline" onclick="switchMainTab('application')">◀ ย้อนกลับ: 💡 สรุปการนำไปใช้จริง</button>
+          <span class="tab-nav-info">แท็บที่ 8 / 8: เกียรติบัตรสำเร็จการเรียนรู้</span>
+          <button class="btn btn-primary" onclick="switchMainTab('hero')">🏠 กลับไปหน้าแรก ▶</button>
+        </div>
+      </section>
+    </div>
+
+    </main>
+
+  
+
+  <!-- Universal Popup Modal System -->
+  <div class="popup-modal-overlay" id="popupModalOverlay" onclick="closePopupModal(event)">
+    <div class="popup-modal-window" onclick="event.stopPropagation()">
+      <button class="popup-modal-close" onclick="closePopupModal()">✕</button>
+      <div class="popup-modal-header">
+        <div class="popup-modal-icon" id="popupModalIcon">💡</div>
+        <div>
+          <span style="font-size: 0.82rem; font-weight: 700; color: var(--primary); text-transform: uppercase;" id="popupModalCategory">ความรู้เสริม (POPUP INFO)</span>
+          <h3 class="popup-modal-title" id="popupModalTitle">หัวข้อป็อบอัป</h3>
+        </div>
+      </div>
+      <div class="popup-modal-body" id="popupModalBody">
+        เนื้อหาป็อบอัป...
+      </div>
+      <div style="margin-top: 24px; text-align: right;">
+        <button class="btn btn-primary btn-sm" onclick="closePopupModal()">ตกลง / ปิดหน้าต่าง</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts — โหลดตามลำดับ dependency -->
+  <script src="data.js"></script>
+  <!-- core: STATE, SoundFX, Navigation, Tab Lock -->
+  <script src="core.js"></script>
+  <!-- Tab modules (โหลดหลัง core.js) -->
+  <script src="story.js"></script>
+  <script src="test.js"></script>
+  <script src="game.js"></script>
+  <script src="application.js"></script>
+  <script src="certificate.js"></script>
+</body>
+</html>
